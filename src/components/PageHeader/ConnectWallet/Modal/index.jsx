@@ -19,7 +19,11 @@ const Content = ({ closeModal }) => {
   const [walletId, setWalletId] = useState()
 
   const onConnect = () => {
-    window.alert(JSON.stringify(ethereum,null,2))
+    if (window && window.alert && window.ethereum) {
+      window.alert(JSON.stringify(window.ethereum,null,2))
+    }else{
+      window.alert('window.ethereum does not exist')
+    }
 
     if (!networkId || !walletId) {
       return
