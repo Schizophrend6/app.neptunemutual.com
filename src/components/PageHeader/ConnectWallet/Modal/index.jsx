@@ -19,6 +19,8 @@ const Content = ({ closeModal }) => {
   const [walletId, setWalletId] = useState()
 
   const onConnect = () => {
+    window.alert(JSON.stringify(ethereum,null,2))
+
     if (!networkId || !walletId) {
       return
     }
