@@ -12,8 +12,8 @@ export const useInactiveListener = (suppress = false) => {
       console.log('Registering events ...')
 
       const createEventListener = (ev) => {
-        console.log(`Handling '${ev}' event`, info)
         return (info) => {
+          console.log(`Handling '${ev}' event`, info)
           activate(wrapperInjectedConnector)
         }
       }
