@@ -11,16 +11,29 @@ export const useInactiveListener = (suppress = false) => {
     if (ethereum && ethereum.on && !active && !error && !suppress) {
       console.log('Registering events ...')
 
-      const handleConnect = (info) => {
-        console.log("Handling 'connect' event", info)
-        activate(wrapperInjectedConnector)
+      const createEventListener = (ev) => {
+        console.log(`Handling '${ev}' event`, info)
+        return (info) => {
+          activate(wrapperInjectedConnector)
+        }
       }
 
+      const handleConnect = createEventListener('connect')
+      const handleChainChanged = createEventListener('chainChanged')
+      const handleAccountsChanged = createEventListener('accountsChanged')
+      const handleNetworkChanged = createEventListener('networkChanged')
+
       ethereum.on('connect', handleConnect)
+      ethereum.on('chainChanged', handleChainChanged)
+      ethereum.on('accountsChanged', handleAccountsChanged)
+      ethereum.on('networkChanged', handleNetworkChanged)
 
       return () => {
         if (ethereum.removeListener) {
           ethereum.removeListener('connect', handleConnect)
+          ethereum.removeListener('chainChanged', handleChainChanged)
+          ethereum.removeListener('accountsChanged', handleAccountsChanged)
+          ethereum.removeListener('networkChanged', handleNetworkChanged)
         }
       }
     }
