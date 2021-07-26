@@ -1,4 +1,3 @@
 .next
 .vercel
 out/
-src/config/abis/*.json

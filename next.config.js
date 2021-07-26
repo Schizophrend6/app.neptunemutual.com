@@ -1,14 +1,10 @@
-const withSvgr = require('next-plugin-svgr')
-
-module.exports = withSvgr({
-  webpack(config, options) {
-    return config
-  },
-  eslint: {
-    ignoreDuringBuilds: true
-  },
+module.exports = {
   future: {
     webpack5: true,
     strictPostcssConfiguration: false
+  },
+  productionBrowserSourceMaps: false,
+  eslint: {
+    ignoreDuringBuilds: true
   }
-})
+}
